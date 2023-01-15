@@ -1,0 +1,63 @@
+- Вывести всех клиентов из страны Canada
+UPDATE customer SET id = null where country = 'Canada';
+DELETE FROM customer WHERE country = 'Canada';
+
+- Вывести все страны клиентов
+SELECT distinct country FROM customer;
+
+- Вывести количество всех заказов
+SELECT count(order_number) FROM orders;
+
+- Вывести максимальную стоимость заказа
+SELECT MAX(total_amount) FROM orders;
+
+- Найти сумму всех заказов
+SELECT sum(total_amount) FROM orders;
+
+- Найти сумму всех заказов за 2014 год
+SELECT count(*) FROM orders WHERE order_date BETWEEN date '1-1-2014' and date'31-12-2014';
+
+- Найти среднюю стоимость всех заказов
+SELECT avg(total_amount) FROM orders;
+
+- Найти среднюю стоимость всех заказов по каждому клиенту
+
+
+
+
+- Найти всех клиентов, которые живут в Бразилии или Испании
+SELECT concat(first_name, ' ',last_name) as full_name, country FROM customer WHERE country IN ('Brazil', 'Spain');
+
+- Найти все заказы между 2013ым и 2014ым годами, которые стоили меньше 100.00$
+SELECT * FROM orders where order_date BETWEEN date '1-1-2013' and date '1-1-2014' and total_amount < 100;
+
+
+- Найти всех клиентов, которые в одной из стран: Испания, Италия, Германия, Франция. Отсортируйте по странам
+SELECT * FROM customer WHERE country IN ('Italy', 'Spain', 'France', 'Germany') order by country;
+
+- Найти все страны клиентов, страны которых содержаться в таблице поставщиков
+SELECT country FROM customer WHERE country IN (SELECT country FROM supplier);
+
+- Найти всех клиентов, имена которых начинаются на ‘Jo’
+SELECT * FROM customer WHERE first_name ILIKE ('Jo%');
+
+- Найти всех клиентов, имена которых заканчиваются на ‘a’ и имеют длину ровно 4 символа
+SELECT * FROM customer WHERE first_name ILIKE ('___a');
+
+- Найти количество клиентов по странам
+SELECT country, count(country) AS number_of_custmer FROM customer GROUP BY country;
+
+- Найти количество клиентов по странам. Вывести в порядке убывания
+SELECT country, count(country) AS number_of_custmer FROM customer GROUP BY country ORDER BY number_of_custmer DESC ;
+
+- Найти общую сумму стоимости заказов и количество заказов по каждому клиенту (customer_id). Отсортировать по сумме
+SELECT SUM(total_amount) AS total, count(order_number) as zakazdardyn_sany FROM orders JOIN customer c
+    on c.id = orders.customer_id GROUP BY customer_id order by  total;
+
+- Найти общую сумму стоимости заказов и количество заказов по каждому клиенту (customer_id), у которых общее количество заказов больше 20ти
+
+
+
+- Найти количество городов в каждой из стран клиентов
+
+
